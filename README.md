@@ -1,39 +1,39 @@
 ## Project Structure
 
-\`\`\`
+```
 react-chill-apps/
-├── index.html # entry point, loads all scripts
-├── package.json # used only to run a static server (serve)
+├── index.html                  # entry point, loads all scripts
+├── package.json                # used only to run a static server (serve)
 ├── .gitignore
 ├── assets/
-│ ├── css/main.css # all styling
-│ └── image/  
+│   ├── css/main.css            # all styling
+│   └── image/
 └── src/
-├── App.jsx # top-level parent, holds page/user/watchlist state
-├── data/
-│ ├── movieData.js
-│ └── watchlistData.js
-├── components/
-│ ├── Header.jsx
-│ ├── Hero.jsx
-│ ├── MovieCard.jsx
-│ ├── ContentSection.jsx
-│ ├── Footer.jsx
-│ ├── WatchlistForm.jsx
-│ └── WatchlistTable.jsx
-└── pages/
-├── Home.jsx
-├── Login.jsx
-├── Register.jsx
-└── Watchlist.jsx
-\`\`\`
+    ├── App.jsx                 # top-level parent, holds page/user/watchlist state
+    ├── data/
+    │   ├── movieData.js
+    │   └── watchlistData.js
+    ├── components/
+    │   ├── Header.jsx
+    │   ├── Hero.jsx
+    │   ├── MovieCard.jsx
+    │   ├── ContentSection.jsx
+    │   ├── Footer.jsx
+    │   ├── WatchlistForm.jsx
+    │   └── WatchlistTable.jsx
+    └── pages/
+        ├── Home.jsx
+        ├── Login.jsx
+        ├── Register.jsx
+        └── Watchlist.jsx
+```
 
 ## Getting Started
 
-\`\`\`bash
+```bash
 npm install
 npm run start
-\`\`\`
+```
 
 The terminal will print a local address, typically `http://localhost:3000`. Open it in a browser.
 
