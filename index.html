@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chill</title>
+<link rel="stylesheet" href="assets/css/main.css">
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+
+<!-- data -->
+<script type="text/babel" src="src/data/watchlistData.js"></script>
+<script type="text/babel" src="src/data/movieData.js"></script>
+
+<!-- components (child) -->
+<script type="text/babel" src="src/components/Header.jsx"></script>
+<script type="text/babel" src="src/components/Hero.jsx"></script>
+<script type="text/babel" src="src/components/MovieCard.jsx"></script>
+<script type="text/babel" src="src/components/ContentSection.jsx"></script>
+<script type="text/babel" src="src/components/Footer.jsx"></script>
+<script type="text/babel" src="src/components/WatchlistForm.jsx"></script>
+<script type="text/babel" src="src/components/WatchlistTable.jsx"></script>
+
+<!-- pages -->
+<script type="text/babel" src="src/pages/Home.jsx"></script>
+<script type="text/babel" src="src/pages/Login.jsx"></script>
+<script type="text/babel" src="src/pages/Register.jsx"></script>
+<script type="text/babel" src="src/pages/Watchlist.jsx"></script>
+
+<!-- parent -->
+<script type="text/babel" src="src/App.jsx"></script>
+
+<!-- entry point -->
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+</script>
+
+</body>
+</html>
