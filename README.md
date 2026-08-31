@@ -50,17 +50,6 @@ New users can click the **Daftar** link below the login form to reach the Regist
 
 To sign out, click the avatar icon and select **Keluar** from the dropdown menu. This clears the session and returns to the Login page.
 
-## Adding Images
-
-The `assets/image/` folder is intentionally empty — no placeholders are included. Drop in files with the exact names below and they will be picked up automatically:
-
-| File name | Used in |
-|---|---|
-| `logo.png` | Header and Footer |
-| `user-icon.png` | Avatar in the Header |
-| `header.png` | Hero banner image |
-| `foto_1.png` through `foto_16.png` | Movie posters throughout the app |
-
 ## Features
 
 - **Login / Register** — the mandatory entry point; validation is limited to empty-field checks and password confirmation matching
