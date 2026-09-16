@@ -1,12 +1,12 @@
 
-const heroMovie = {
+export const heroMovie = {
   title: "Duty After Us",
   image: "/assets/image/header.png",
   description:
     "Sebuah benda tak dikenal mengambil alih dunia. Dalam keputusasaan, Departemen Pertahanan mulai merekrut lebih banyak tentara, termasuk siswa sekolah menengah. Mereka pun segera menjadi pejuang garis depan dalam perang.",
 };
 
-const continueWatching = [
+export const continueWatching = [
   {
     id: 1,
     title: "Don't Look Up",
@@ -37,7 +37,7 @@ const continueWatching = [
   },
 ];
 
-const topRating = [
+export const topRating = [
   { id: 5, title: "Suzume", image: "/assets/image/foto_5.png", rating: 9.2 },
   {
     id: 6,
@@ -60,7 +60,7 @@ const topRating = [
   },
 ];
 
-const trending = [
+export const trending = [
   { id: 10, title: "Trending 1", image: "/assets/image/foto_10.png" },
   { id: 11, title: "Trending 2", image: "/assets/image/foto_11.png" },
   { id: 12, title: "Trending 3", image: "/assets/image/foto_12.png" },
@@ -68,7 +68,7 @@ const trending = [
   { id: 14, title: "Trending 5", image: "/assets/image/foto_14.png" },
 ];
 
-const newReleases = [
+export const newReleases = [
   { id: 20, title: "Rilis 1", image: "/assets/image/foto_14.png" },
   { id: 21, title: "Episode Baru 1", image: "/assets/image/foto_15.png" },
   { id: 22, title: "Rilis 2", image: "/assets/image/foto_9.png" },

@@ -8,6 +8,7 @@
 // tidak bisa diisi/diubah dari sini — itu data master film yang sudah
 // ditentukan. User hanya mengatur Judul, Rating pribadi, dan Status Tonton.
 // Item baru otomatis dapat Tipe "Film" dan Genre "Umum" sebagai default.
+import { useState, useEffect } from "react";
 
 const emptyForm = {
   title: "",
@@ -19,10 +20,10 @@ const DEFAULT_TYPE = "Film";
 const DEFAULT_GENRE = "Umum";
 
 function WatchlistForm({ editingItem, onSave, onCancel }) {
-  const [form, setForm] = React.useState(emptyForm);
-  const [error, setError] = React.useState("");
+  const [form, setForm] = useState(emptyForm);
+  const [error, setError] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (editingItem) {
       setForm({
         title: editingItem.title,
@@ -126,3 +127,5 @@ function WatchlistForm({ editingItem, onSave, onCancel }) {
     </div>
   );
 }
+
+export default WatchlistForm;

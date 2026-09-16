@@ -1,11 +1,14 @@
 // Watchlist.jsx
+import { useState } from "react";
+import WatchlistForm from "../components/WatchlistForm.jsx";
+import WatchlistTable from "../components/WatchlistTable.jsx";
 
 function Watchlist({ watchlist, onAdd, onUpdate, onDelete }) {
-  const [editingItem, setEditingItem] = React.useState(null);
-  const [showModal, setShowModal] = React.useState(false);
-  const [duplicateNotice, setDuplicateNotice] = React.useState(false);
-  const [search, setSearch] = React.useState("");
-  const [filterStatus, setFilterStatus] = React.useState("Semua");
+  const [editingItem, setEditingItem] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [duplicateNotice, setDuplicateNotice] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filterStatus, setFilterStatus] = useState("Semua");
 
   function handleSave(formData) {
     if (editingItem) {
@@ -133,3 +136,5 @@ function Watchlist({ watchlist, onAdd, onUpdate, onDelete }) {
     </div>
   );
 }
+
+export default Watchlist;

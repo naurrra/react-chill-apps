@@ -1,4 +1,5 @@
 // ContentSection.jsx
+import MovieCard from "./MovieCard.jsx";
 
 function ContentSection({ title, movies, variant, onOpenMovie }) {
   return (
@@ -22,3 +23,5 @@ function ContentSection({ title, movies, variant, onOpenMovie }) {
     </section>
   );
 }
+
+export default ContentSection;

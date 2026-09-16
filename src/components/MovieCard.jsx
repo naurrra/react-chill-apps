@@ -2,6 +2,7 @@
 // Satu komponen dipakai ulang untuk 4 seksi berbeda di index.html
 // (Lanjutkan Menonton, Top Rating, Trending, Rilis Baru).
 // Semua data datang dari props — komponen ini tidak punya state sendiri.
+import { Fragment } from "react";
 
 function MovieCard({ movie, variant, onOpen }) {
   const isTall = variant !== "continue";
@@ -31,7 +32,7 @@ function MovieCard({ movie, variant, onOpen }) {
         <div className="info">
           <div className="title">{movie.title}</div>
           {variant === "continue" && (
-            <React.Fragment>
+            <Fragment>
               <div className="meta">{movie.meta}</div>
               <div className="progress-track">
                 <div
@@ -39,10 +40,12 @@ function MovieCard({ movie, variant, onOpen }) {
                   style={{ width: movie.progress + "%" }}
                 ></div>
               </div>
-            </React.Fragment>
+            </Fragment>
           )}
         </div>
       )}
     </div>
   );
 }
+
+export default MovieCard;

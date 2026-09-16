@@ -1,9 +1,27 @@
-// App.jsx 
+// App.jsx — parent tertinggi aplikasi.
+
+import { Fragment, useState } from "react";
+
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Watchlist from "./pages/Watchlist.jsx";
+
+import initialWatchlist from "./data/watchlistData.js";
+import {
+  heroMovie,
+  continueWatching,
+  topRating,
+  trending,
+  newReleases,
+} from "./data/movieData.js";
 
 function App() {
-  const [page, setPage] = React.useState("login");
-  const [user, setUser] = React.useState(null);
-  const [watchlist, setWatchlist] = React.useState(initialWatchlist);
+  const [page, setPage] = useState("home");
+  const [user, setUser] = useState(null);
+  const [watchlist, setWatchlist] = useState(initialWatchlist);
 
   function handleNavigate(nextPage) {
     setPage(nextPage);
@@ -19,16 +37,9 @@ function App() {
     setPage("home");
   }
 
-  function handleLogout() {
-    setUser(null);
-    setPage("login");
-  }
-
   function handleWatchNow(title) {
     alert("Memutar: " + title);
   }
-
-  // ---- CRUD handlers untuk array watchlist ----
 
   function handleAddItem(newItemData) {
     setWatchlist((prev) => {
@@ -49,49 +60,20 @@ function App() {
   }
 
   const sections = [
-    {
-      key: "continue",
-      title: "Lanjutkan Menonton",
-      movies: continueWatching,
-      variant: "continue",
-    },
-    {
-      key: "rating",
-      title: "Top Rating",
-      movies: topRating,
-      variant: "rating",
-    },
-    {
-      key: "trending",
-      title: "Sedang Trending",
-      movies: trending,
-      variant: "rank",
-    },
-    {
-      key: "new",
-      title: "Rilis Film Baru",
-      movies: newReleases,
-      variant: "new",
-    },
+    { key: "continue", title: "Lanjutkan Menonton", movies: continueWatching, variant: "continue" },
+    { key: "rating", title: "Top Rating", movies: topRating, variant: "rating" },
+    { key: "trending", title: "Sedang Trending", movies: trending, variant: "rank" },
+    { key: "new", title: "Rilis Film Baru", movies: newReleases, variant: "new" },
   ];
 
   return (
-    <React.Fragment>
+    <Fragment>
       {page !== "login" && page !== "register" && (
-        <Header
-          currentPage={page}
-          onNavigate={handleNavigate}
-          user={user}
-          onLogout={handleLogout}
-        />
+        <Header currentPage={page} onNavigate={handleNavigate} />
       )}
 
       {page === "home" && (
-        <Home
-          heroMovie={heroMovie}
-          sections={sections}
-          onWatch={handleWatchNow}
-        />
+        <Home heroMovie={heroMovie} sections={sections} onWatch={handleWatchNow} />
       )}
 
       {page === "login" && (
@@ -99,10 +81,7 @@ function App() {
       )}
 
       {page === "register" && (
-        <Register
-          onNavigate={handleNavigate}
-          onRegisterSuccess={handleRegisterSuccess}
-        />
+        <Register onNavigate={handleNavigate} onRegisterSuccess={handleRegisterSuccess} />
       )}
 
       {page === "watchlist" && (
@@ -115,6 +94,8 @@ function App() {
       )}
 
       {page !== "login" && page !== "register" && <Footer />}
-    </React.Fragment>
+    </Fragment>
   );
 }
+
+export default App;

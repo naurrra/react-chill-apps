@@ -2,11 +2,12 @@
 // Volume control HANYA dipakai di dalam Hero, jadi state-nya lokal di sini
 // (tidak perlu naik ke App). Ini contoh "deteksi komponen mana yang berubah":
 // ubah volume => hanya Hero yang re-render, bukan Header/ContentSection lain.
+import { useState } from "react"
 
 function Hero({ movie, onWatch }) {
-  const [volume, setVolume] = React.useState(70);
-  const [lastVolume, setLastVolume] = React.useState(70);
-  const [isMuted, setIsMuted] = React.useState(false);
+  const [volume, setVolume] = useState(70);
+  const [lastVolume, setLastVolume] = useState(70);
+  const [isMuted, setIsMuted] = useState(false);
 
   function volumeIcon(value) {
     if (value == 0) return "🔇";
@@ -65,3 +66,5 @@ function Hero({ movie, onWatch }) {
     </section>
   );
 }
+
+export default Hero;

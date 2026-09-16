@@ -1,8 +1,11 @@
 // Home.jsx
+import { Fragment } from "react";
+import Hero from "../components/Hero.jsx";
+import ContentSection from "../components/ContentSection.jsx";
 
 function Home({ heroMovie, sections, onWatch }) {
   return (
-    <React.Fragment>
+    <Fragment>
       <Hero movie={heroMovie} onWatch={onWatch} />
 
       {sections.map((section) => (
@@ -13,6 +16,8 @@ function Home({ heroMovie, sections, onWatch }) {
           variant={section.variant}
         />
       ))}
-    </React.Fragment>
+    </Fragment>
   );
 }
+
+export default Home;

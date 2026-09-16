@@ -1,7 +1,8 @@
 // Header.jsx
+import { useState } from "react";
 
 function Header({ currentPage, onNavigate, user, onLogout }) {
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navItems = [
     { key: "home", label: "Home" },
@@ -19,7 +20,7 @@ function Header({ currentPage, onNavigate, user, onLogout }) {
     <header className="site-header">
       <div className="header-left">
         <div className="brand">
-          <img src="assets/image/logo.png" className="mark" alt="Moviez" />
+          <img src="/assets/image/logo.png" className="mark" alt="Moviez" />
         </div>
         <nav className="main-nav">
           {navItems.map((item) => (
@@ -46,7 +47,7 @@ function Header({ currentPage, onNavigate, user, onLogout }) {
       aria-label="Buka menu akun"
     >
       <img
-        src="assets/image/user-icon.png"
+        src="/assets/image/user-icon.png"
         alt="Profil pengguna"
         className="avatar"
       />
@@ -72,3 +73,5 @@ function Header({ currentPage, onNavigate, user, onLogout }) {
     </header>
   );
 }
+
+export default Header;

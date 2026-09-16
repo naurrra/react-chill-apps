@@ -22,7 +22,7 @@ function Footer() {
     <footer className="site-footer">
       <div className="footer-top">
         <div className="footer-brand">
-          <img src="assets/image/logo.png" alt="Chill" className="mark" />
+          <img src="/assets/image/logo.png" alt="Chill" className="mark" />
         </div>
 
         <div className="footer-col">
@@ -51,3 +51,5 @@ function Footer() {
     </footer>
   );
 }
+
+export default Footer;

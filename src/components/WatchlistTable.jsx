@@ -68,3 +68,5 @@ function WatchlistTable({ items, onEdit, onDelete }) {
     </div>
   );
 }
+
+export default WatchlistTable;

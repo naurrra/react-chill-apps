@@ -1,9 +1,10 @@
 // Login.jsx
+import { useState } from "react";
 
 function Login({ onNavigate, onLoginSuccess }) {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ function Login({ onNavigate, onLoginSuccess }) {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <img src="assets/image/logo.png" alt="Chill" className="mark" />
+          <img src="/assets/image/logo.png" alt="Chill" className="mark" />
         </div>
 
         <div className="auth-title">Masuk</div>
@@ -110,3 +111,5 @@ function Login({ onNavigate, onLoginSuccess }) {
     </div>
   );
 }
+
+export default Login;

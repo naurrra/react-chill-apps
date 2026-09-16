@@ -1,10 +1,11 @@
 // Register.jsx
+import { useState } from "react";
 
 function Register({ onNavigate, onRegisterSuccess }) {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,7 +25,7 @@ function Register({ onNavigate, onRegisterSuccess }) {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <img src="assets/image/logo.png" alt="Chill" className="mark" />
+          <img src="/assets/image/logo.png" alt="Chill" className="mark" />
         </div>
 
         <div className="auth-title">Daftar</div>
@@ -125,3 +126,5 @@ function Register({ onNavigate, onRegisterSuccess }) {
     </div>
   );
 }
+
+export default Register;

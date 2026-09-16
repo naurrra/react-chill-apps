@@ -42,3 +42,5 @@ const initialWatchlist = [
     status: "Selesai",
   },
 ];
+
+export default initialWatchlist;
