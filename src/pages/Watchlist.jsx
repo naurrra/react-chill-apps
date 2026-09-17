@@ -3,7 +3,7 @@ import { useState } from "react";
 import WatchlistForm from "../components/WatchlistForm.jsx";
 import WatchlistTable from "../components/WatchlistTable.jsx";
 
-function Watchlist({ watchlist, onAdd, onUpdate, onDelete }) {
+function Watchlist({ watchlist, isLoading, error, onAdd, onUpdate, onDelete }) {
   const [editingItem, setEditingItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [duplicateNotice, setDuplicateNotice] = useState(false);
@@ -58,6 +58,15 @@ function Watchlist({ watchlist, onAdd, onUpdate, onDelete }) {
       setShowModal(false);
     }
     onDelete(id);
+if (isLoading) {
+    return <div className="watchlist-status">Memuat watchlist...</div>;
+  }
+ 
+  if (error) {
+    return <div className="watchlist-status watchlist-status-error">Gagal memuat watchlist: {error}</div>;
+  }
+
+
   }
 
   // Derivasi tampilan: filter + search dihitung ulang tiap render,

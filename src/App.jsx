@@ -8,6 +8,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
+import useWatchlist from "./hooks/useWatchlist.js";
 
 import initialWatchlist from "./data/watchlistData.js";
 import {
@@ -21,7 +22,7 @@ import {
 function App() {
   const [page, setPage] = useState("home");
   const [user, setUser] = useState(null);
-  const [watchlist, setWatchlist] = useState(initialWatchlist);
+  const { watchlist, isLoading, error, addItem, updateItem, deleteItem, refetch } = useWatchlist();
 
   function handleNavigate(nextPage) {
     setPage(nextPage);
@@ -41,23 +42,6 @@ function App() {
     alert("Memutar: " + title);
   }
 
-  function handleAddItem(newItemData) {
-    setWatchlist((prev) => {
-      const nextId =
-        prev.length > 0 ? Math.max(...prev.map((i) => i.id)) + 1 : 1;
-      return [...prev, { id: nextId, ...newItemData }];
-    });
-  }
-
-  function handleUpdateItem(id, updatedData) {
-    setWatchlist((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, ...updatedData } : item))
-    );
-  }
-
-  function handleDeleteItem(id) {
-    setWatchlist((prev) => prev.filter((item) => item.id !== id));
-  }
 
   const sections = [
     { key: "continue", title: "Lanjutkan Menonton", movies: continueWatching, variant: "continue" },
@@ -85,13 +69,15 @@ function App() {
       )}
 
       {page === "watchlist" && (
-        <Watchlist
-          watchlist={watchlist}
-          onAdd={handleAddItem}
-          onUpdate={handleUpdateItem}
-          onDelete={handleDeleteItem}
-        />
-      )}
+      <Watchlist
+        watchlist={watchlist}
+        isLoading={isLoading}
+        error={error}
+        onAdd={addItem}
+        onUpdate={updateItem}
+        onDelete={deleteItem}
+      />
+    )}
 
       {page !== "login" && page !== "register" && <Footer />}
     </Fragment>
