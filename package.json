@@ -11,12 +11,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",
-    "serve": "^14.2.1",
     "vite": "^8.3.0"
   },
   "description": "```\r react-chill-apps/\r ├── index.html                  # entry point, loads all scripts\r ├── package.json                # used only to run a static server (serve)\r ├── .gitignore\r ├── assets/\r │   ├── css/main.css            # all styling\r │   └── image/\r └── src/\r     ├── App.jsx                 # top-level parent, holds page/user/watchlist state\r     ├── data/\r     │   ├── movieData.js\r     │   └── watchlistData.js\r     ├── components/\r     │   ├── Header.jsx\r     │   ├── Hero.jsx\r     │   ├── MovieCard.jsx\r     │   ├── ContentSection.jsx\r     │   ├── Footer.jsx\r     │   ├── WatchlistForm.jsx\r     │   └── WatchlistTable.jsx\r     └── pages/\r         ├── Home.jsx\r         ├── Login.jsx\r         ├── Register.jsx\r         └── Watchlist.jsx\r ```",
   "main": "index.js",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.13.0",
     "ajv": "^8.18.0",
     "ansi-align": "^3.0.1",
     "ansi-regex": "^6.3.0",
@@ -36,7 +36,6 @@
     "color-convert": "^2.0.1",
     "color-name": "^1.1.4",
     "compressible": "^2.0.18",
-    "compression": "^1.8.1",
     "concat-map": "^0.0.1",
     "content-disposition": "^0.5.2",
     "cross-spawn": "^7.0.6",
@@ -76,6 +75,7 @@
     "rc": "^1.2.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "react-redux": "^9.3.0",
     "registry-auth-token": "^3.3.2",
     "registry-url": "^3.1.0",
     "require-from-string": "^2.0.2",

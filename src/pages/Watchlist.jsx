@@ -58,15 +58,6 @@ function Watchlist({ watchlist, isLoading, error, onAdd, onUpdate, onDelete }) {
       setShowModal(false);
     }
     onDelete(id);
-if (isLoading) {
-    return <div className="watchlist-status">Memuat watchlist...</div>;
-  }
- 
-  if (error) {
-    return <div className="watchlist-status watchlist-status-error">Gagal memuat watchlist: {error}</div>;
-  }
-
-
   }
 
   // Derivasi tampilan: filter + search dihitung ulang tiap render,
@@ -79,6 +70,18 @@ if (isLoading) {
       filterStatus === "Semua" || item.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
+
+  if (isLoading) {
+    return <div className="watchlist-status">Memuat watchlist...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="watchlist-status watchlist-status-error">
+        Gagal memuat watchlist: {error}
+      </div>
+    );
+  }
 
   return (
     <div className="watchlist-page">

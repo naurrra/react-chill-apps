@@ -1,50 +1,57 @@
 import { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setData } from "../store/redux/reducer.js";
 import {
   getWatchlist,
   addWatchlistItem,
   updateWatchlistItem,
   deleteWatchlistItem,
 } from "../api/watchlistApi.js";
- 
+
 function useWatchlist() {
-  const [watchlist, setWatchlist] = useState([]);
+  const dispatch = useDispatch();
+  const watchlist = useSelector((state) => state.data.data);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
- 
+
+  // GET -> simpan hasilnya ke Redux
+  const loadData = useCallback(async () => {
+    const response = await getWatchlist();
+    dispatch(setData(response.data));
+  }, [dispatch]);
+
   const fetchWatchlist = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await getWatchlist();
-      setWatchlist(response.data);
+      await loadData();
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
-  }, []);
- 
+  }, [loadData]);
+
   useEffect(() => {
     fetchWatchlist();
   }, [fetchWatchlist]);
- 
+
+  // ADD / EDIT / DELETE: panggil API, lalu GET ulang agar Redux sinkron.
   async function addItem(newItemData) {
-    const response = await addWatchlistItem(newItemData);
-    setWatchlist((prev) => [...prev, response.data]);
+    await addWatchlistItem(newItemData);
+    await loadData();
   }
- 
+
   async function updateItem(id, updatedData) {
-    const response = await updateWatchlistItem(id, updatedData);
-    setWatchlist((prev) =>
-      prev.map((item) => (item.id === id ? response.data : item))
-    );
+    await updateWatchlistItem(id, updatedData);
+    await loadData();
   }
- 
+
   async function deleteItem(id) {
     await deleteWatchlistItem(id);
-    setWatchlist((prev) => prev.filter((item) => item.id !== id));
+    await loadData();
   }
- 
+
   return {
     watchlist,
     isLoading,
@@ -55,5 +62,5 @@ function useWatchlist() {
     refetch: fetchWatchlist,
   };
 }
- 
+
 export default useWatchlist;
