@@ -11,6 +11,9 @@ import {
 function useWatchlist() {
   const dispatch = useDispatch();
   const watchlist = useSelector((state) => state.data.data);
+    useEffect(() => {
+      console.table(watchlist);
+    }, [watchlist]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
