@@ -1,0 +1,19 @@
+{
+  "name": "chill-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "REST API sederhana untuk data movie (Node.js, Express, MySQL)",
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "dev": "node --watch --env-file=.env src/server.js"
+  },
+  "engines": {
+    "node": ">=22.23.4 <23 || >=24.22.1 <25 || >=26.12.1"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "mysql2": "3.24.6"
+  },
+  "license": "ISC"
+}
