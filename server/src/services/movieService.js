@@ -1,6 +1,7 @@
 // services/movieService.js
 // Semua query SQL ada di sini. Route hanya memanggil fungsi-fungsi ini.
-// Seluruh nilai dari pengguna dikirim lewat placeholder
+// Seluruh nilai dari pengguna dikirim lewat placeholder (?) sehingga tidak
+// pernah digabung langsung ke teks SQL (mencegah SQL injection).
 
 import pool from "../config/db.js";
 
@@ -9,13 +10,61 @@ const COLUMNS = "id, title, genre, rating, release_year";
 // Kolom yang boleh diubah. Nama kolom pada UPDATE hanya diambil dari daftar ini.
 const UPDATABLE_COLUMNS = ["title", "genre", "rating", "release_year"];
 
+// Kolom yang boleh dipakai ORDER BY. ORDER BY tidak bisa memakai placeholder,
+// jadi nama kolom dan arah urutan hanya diambil dari daftar tetap ini.
+const SORT_COLUMNS = {
+  id: "id",
+  title: "title",
+  genre: "genre",
+  rating: "rating",
+  release_year: "release_year",
+};
+const SORT_DIRECTIONS = { asc: "ASC", desc: "DESC" };
+
+// Karakter khusus LIKE (% dan _) dari pengguna dianggap teks biasa.
+function escapeLike(value) {
+  return value.replace(/[\\%_]/g, "\\$&");
+}
+
 // ---------- SELECT ----------
 
-// SELECT * : ambil semua data
-export async function selectAllMovies() {
-  const [rows] = await pool.execute(
-    `SELECT ${COLUMNS} FROM movies ORDER BY id`
-  );
+// Menyusun query daftar movie: FILTER (genre), SEARCH (title), SORT (ORDER BY).
+// Dibuat sebagai fungsi terpisah supaya mudah diuji tanpa database.
+export function buildMovieListQuery({ genre, search, sortBy } = {}) {
+  const conditions = [];
+  const params = [];
+
+  if (genre) {
+    conditions.push("genre = ?");
+    params.push(genre);
+  }
+  if (search) {
+    conditions.push("title LIKE ?");
+    params.push(`%${escapeLike(search)}%`);
+  }
+
+  const where = conditions.length > 0 ? ` WHERE ${conditions.join(" AND ")}` : "";
+
+  const column =
+    sortBy && Object.hasOwn(SORT_COLUMNS, sortBy.field) ? SORT_COLUMNS[sortBy.field] : "id";
+  const direction =
+    sortBy && Object.hasOwn(SORT_DIRECTIONS, sortBy.direction)
+      ? SORT_DIRECTIONS[sortBy.direction]
+      : "ASC";
+
+  // Urutan kedua (id) menjaga hasil tetap stabil saat nilai kolom sama.
+  const orderBy = column === "id" ? `id ${direction}` : `${column} ${direction}, id ASC`;
+
+  return {
+    sql: `SELECT ${COLUMNS} FROM movies${where} ORDER BY ${orderBy}`,
+    params,
+  };
+}
+
+// SELECT * : ambil semua data (opsional dengan filter, search, dan sort)
+export async function selectAllMovies(options = {}) {
+  const { sql, params } = buildMovieListQuery(options);
+  const [rows] = await pool.execute(sql, params);
   return rows;
 }
 

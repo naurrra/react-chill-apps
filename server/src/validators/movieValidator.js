@@ -80,3 +80,56 @@ export function validateMovie(body, { partial }) {
 
   return { errors, data };
 }
+
+// ---------- Query params untuk GET /movie ----------
+// genre  -> FILTER   (WHERE genre = ?)
+// search -> SEARCH   (WHERE title LIKE ?)
+// sortBy -> SORT     (ORDER BY), format "kolom" atau "kolom:asc" / "kolom:desc"
+
+const SORTABLE_FIELDS = ["id", "title", "genre", "rating", "release_year"];
+
+function isBlank(value) {
+  return value === undefined || (typeof value === "string" && value.trim() === "");
+}
+
+export function parseMovieQuery(query) {
+  const errors = [];
+  const options = {};
+  const { genre, search, sortBy } = query ?? {};
+
+  if (!isBlank(genre)) {
+    if (typeof genre !== "string" || genre.trim().length > 50) {
+      errors.push("genre harus berupa satu teks maksimal 50 karakter.");
+    } else {
+      options.genre = genre.trim();
+    }
+  }
+
+  if (!isBlank(search)) {
+    if (typeof search !== "string" || search.trim().length > 100) {
+      errors.push("search harus berupa satu teks maksimal 100 karakter.");
+    } else {
+      options.search = search.trim();
+    }
+  }
+
+  if (!isBlank(sortBy)) {
+    const parts = typeof sortBy === "string" ? sortBy.trim().split(":") : [];
+    const field = parts[0];
+    const direction = (parts[1] ?? "asc").toLowerCase();
+
+    if (
+      parts.length > 2 ||
+      !SORTABLE_FIELDS.includes(field) ||
+      !["asc", "desc"].includes(direction)
+    ) {
+      errors.push(
+        "sortBy harus berformat kolom atau kolom:asc atau kolom:desc, dengan kolom salah satu dari id, title, genre, rating, release_year."
+      );
+    } else {
+      options.sortBy = { field, direction };
+    }
+  }
+
+  return { errors, options };
+}

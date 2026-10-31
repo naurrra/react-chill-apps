@@ -2,14 +2,21 @@
 // Menyusun aplikasi Express: middleware, route, dan penanganan error.
 
 import express from "express";
+import authRoutes from "./routes/authRoutes.js";
 import movieRoutes from "./routes/movieRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 const app = express();
 
 app.disable("x-powered-by");
+
+// inflate: false -> body request terkompresi (gzip, br, dll.) ditolak dengan 415.
+// Mengurangi keterpaparan terhadap celah dekoder Brotli (CVE-2026-111497).
 app.use(express.json({ limit: "100kb", inflate: false }));
 
+app.use(authRoutes); // /register, /login, /verify-email
 app.use("/movie", movieRoutes);
+app.use("/upload", uploadRoutes);
 
 // Route yang tidak dikenal
 app.use((req, res) => {
@@ -20,7 +27,7 @@ app.use((req, res) => {
 // Detail error hanya ditulis ke log server, tidak dikirim ke klien.
 app.use((err, req, res, next) => {
   if (err.type === "entity.parse.failed") {
-    return res.status(400).json({ status: "error", message: "Invalid JSON in request body." });
+    return res.status(400).json({ status: "error", message: "Body bukan JSON yang valid." });
   }
 
   console.error(err);
